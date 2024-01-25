@@ -1,31 +1,49 @@
-import quixstreams as qx
-import os
-import pandas as pd
+from quixstreams.kafka import Producer
+from quixstreams import Application, State, message_key
+from sentence_transformers import SentenceTransformer
+from qdrant_client import models, QdrantClient
 
+qdrant = QdrantClient(path="./scifi-books4") # persist a Qdrant DB on the filesystem
 
-client = qx.QuixStreamingClient()
+# Create collection to store books
+qdrant.recreate_collection(
+    collection_name="my_books",
+    vectors_config=models.VectorParams(
+        size=encoder.get_sentence_embedding_dimension(), # Vector size is defined by used model
+        distance=models.Distance.COSINE
+    )
+)
 
-# get the topic consumer for a specific consumer group
-topic_consumer = client.get_topic_consumer(topic_id_or_name = os.environ["input"],
-                                           consumer_group = "empty-destination")
+# Define the ingestion function
+def ingest_vectors(row):
 
+  single_record = models.PointStruct(
+    id=row['doc_uuid'],
+    vector=row['embeddings'],
+    payload=row
+    )
 
-def on_dataframe_received_handler(stream_consumer: qx.StreamConsumer, df: pd.DataFrame):
-    # do something with the data here
-    print(df)
+  qdrant.upload_points(
+      collection_name="my_books",
+      points=[single_record]
+    )
 
+  print(f'Ingested vector entry id: "{row["doc_uuid"]}"...')
 
-def on_stream_received_handler(stream_consumer: qx.StreamConsumer):
-    # subscribe to new DataFrames being received
-    # if you aren't familiar with DataFrames there are other callbacks available
-    # refer to the docs here: https://docs.quix.io/sdk/subscribe.html
-    stream_consumer.timeseries.on_dataframe_received = on_dataframe_received_handler
+app = Application(
+    broker_address="127.0.0.1:9092",
+    consumer_group="vectorizer3",
+    auto_offset_reset="earliest",
+    consumer_extra_config={"allow.auto.create.topics": "true"},
+)
 
+# Define an input topic with JSON deserializer
+input_topic = app.topic(inputtopicname, value_deserializer="json")
 
-# subscribe to new streams being received
-topic_consumer.on_stream_received = on_stream_received_handler
+# Initialize a streaming dataframe based on the stream of messages from the input topic:
+sdf = app.dataframe(topic=input_topic)
 
-print("Listening to streams. Press CTRL-C to exit.")
-
-# Handle termination signals and provide a graceful exit
-qx.App.run()
+# INGESTION HAPPENS HERE
+### Trigger the embedding function for any new messages(rows) detected in the filtered SDF
+sdf = sdf.update(lambda row: ingest_vectors(row))
+app.run(sdf)
