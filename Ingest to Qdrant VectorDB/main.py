@@ -5,10 +5,11 @@ import os
 
 qdrant = QdrantClient(path=f"./{os.environ['vectordbname']}") # persist a Qdrant DB on the filesystem
 encoder = SentenceTransformer('all-MiniLM-L6-v2') # Model to create embeddings
+collection = os.environ['collectionname']
 
-# Create collection to store books
+# Create collection to store items
 qdrant.recreate_collection(
-    collection_name=os.environ['vectordbname'],
+    collection_name=collection,
     vectors_config=models.VectorParams(
         size=encoder.get_sentence_embedding_dimension(), # Vector size is defined by used model
         distance=models.Distance.COSINE
@@ -25,7 +26,7 @@ def ingest_vectors(row):
     )
 
   qdrant.upload_points(
-      collection_name=os.environ['vectordbname'],
+      collection_name=collection,
       points=[single_record]
     )
 
