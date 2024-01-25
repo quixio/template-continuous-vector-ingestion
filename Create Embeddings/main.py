@@ -1,42 +1,45 @@
-import quixstreams as qx
+from quixstreams.kafka import Producer
+from quixstreams import Application, State, message_key
+from sentence_transformers import SentenceTransformer
 import os
+import time
 import pandas as pd
 
+encoder = SentenceTransformer('all-MiniLM-L6-v2') # Model to create embeddings
 
-client = qx.QuixStreamingClient()
+# Define the embedding function
+def create_embeddings(row):
+    text = row['doc_descr']
+    embeddings = encoder.encode(text)
+    embedding_list = embeddings.tolist() # Conversion step because SentenceTransformer outputs a numpy Array but Qdrant expects a plain list
+    print(f'Created vector: "{embedding_list}"')
 
-topic_consumer = client.get_topic_consumer(os.environ["input"], consumer_group = "empty-transformation")
-topic_producer = client.get_topic_producer(os.environ["output"])
+    return embedding_list
 
+app = Application(
+    #broker_address="127.0.0.1:9092",
+    consumer_group="vectorizer",
+    auto_offset_reset="earliest",
+    consumer_extra_config={"allow.auto.create.topics": "true"},
+)
 
-def on_dataframe_received_handler(stream_consumer: qx.StreamConsumer, df: pd.DataFrame):
+# Define an input topic with JSON deserializer
+input_topic = app.topic(os.environ['input'], value_deserializer="json")
 
-    # Transform data frame here in this method. You can filter data or add new features.
-    # Pass modified data frame to output stream using stream producer.
-    # Set the output stream id to the same as the input stream or change it,
-    # if you grouped or merged data with different key.
-    stream_producer = topic_producer.get_or_create_stream(stream_id = stream_consumer.stream_id)
-    stream_producer.timeseries.buffer.publish(df)
+# Define an output topic with JSON serializer
+output_topic = app.topic(os.environ['output'], value_serializer="json")
 
+# Initialize a streaming dataframe based on the stream of messages from the input topic:
+sdf = app.dataframe(topic=input_topic)
+sdf = sdf.update(lambda val: print(f"Received update: {val}"))
 
-# Handle event data from samples that emit event data
-def on_event_data_received_handler(stream_consumer: qx.StreamConsumer, data: qx.EventData):
-    print(data)
-    # handle your event data here
+# Trigger the embedding function for any new messages(rows) detected in the filtered SDF
+sdf["embeddings"] = sdf.apply(create_embeddings, stateful=False)
 
+# Update the timestamp column to the current time in nanoseconds
+sdf["Timestamp"] = sdf["Timestamp"].apply(lambda row: time.time_ns())
 
-def on_stream_received_handler(stream_consumer: qx.StreamConsumer):
-    # subscribe to new DataFrames being received
-    # if you aren't familiar with DataFrames there are other callbacks available
-    # refer to the docs here: https://docs.quix.io/sdk/subscribe.html
-    stream_consumer.events.on_data_received = on_event_data_received_handler # register the event data callback
-    stream_consumer.timeseries.on_dataframe_received = on_dataframe_received_handler
+# Publish the processed SDF to a Kafka topic specified by the output_topic object.
+sdf = sdf.to_topic(output_topic)
 
-
-# subscribe to new streams being received
-topic_consumer.on_stream_received = on_stream_received_handler
-
-print("Listening to streams. Press CTRL-C to exit.")
-
-# Handle termination signals and provide a graceful exit
-qx.App.run()
+app.run(sdf)
