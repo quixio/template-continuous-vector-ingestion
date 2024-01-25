@@ -40,6 +40,31 @@ deployments:
         description: Name of the output topic to write to.
         required: false
         value: embeddings-sbert
+  - name: Ingest to Qdrant VectorDB
+    application: Ingest to Qdrant VectorDB
+    deploymentType: Service
+    version: 5a75c11612bad0a2751c60a196b62a0055706e41
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    desiredStatus: Running
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: This is the input topic for demo data
+        required: true
+        value: embeddings-sbert
+      - name: vectordbname
+        inputType: FreeText
+        description: ''
+        required: true
+        value: myvectordb
+      - name: collectionname
+        inputType: FreeText
+        description: ''
+        required: false
+        value: mycollection
 
 # This section describes the Topics of the data pipeline
 topics:
