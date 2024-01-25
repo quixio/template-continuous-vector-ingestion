@@ -1,9 +1,7 @@
-from quixstreams.kafka import Producer
-from quixstreams import Application, State, message_key
+from quixstreams import Application
 from sentence_transformers import SentenceTransformer
 import os
 import time
-import pandas as pd
 
 encoder = SentenceTransformer('all-MiniLM-L6-v2') # Model to create embeddings
 
@@ -16,18 +14,17 @@ def create_embeddings(row):
 
     return embedding_list
 
-app = Application(
-    #broker_address="127.0.0.1:9092",
-    consumer_group="vectorizer",
+app = Application.Quix(
+    "vectorizer",
     auto_offset_reset="earliest",
-    consumer_extra_config={"allow.auto.create.topics": "true"},
+    auto_create_topics=True,  # Quix app has an option to auto create topics
 )
 
 # Define an input topic with JSON deserializer
-input_topic = app.topic(os.environ['input'], value_deserializer="json")
+input_topic = app.topic(os.environ['input'], value_deserializer="quix")
 
 # Define an output topic with JSON serializer
-output_topic = app.topic(os.environ['output'], value_serializer="json")
+output_topic = app.topic(os.environ['output'], value_serializer="quix")
 
 # Initialize a streaming dataframe based on the stream of messages from the input topic:
 sdf = app.dataframe(topic=input_topic)
