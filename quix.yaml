@@ -5,7 +5,22 @@ metadata:
   version: 1.0
 
 # This section describes the Deployments of the data pipeline
-deployments: []
+deployments:
+  - name: CSV data
+    application: CSV data
+    deploymentType: Service
+    version: 0c503d937bfacfb32714cb100bca115725fdd731
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    desiredStatus: Running
+    variables:
+      - name: output
+        inputType: OutputTopic
+        description: Name of the output topic to write into
+        required: true
+        value: raw-documents
 
 # This section describes the Topics of the data pipeline
 topics:
