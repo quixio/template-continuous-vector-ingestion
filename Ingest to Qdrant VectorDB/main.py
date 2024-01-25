@@ -39,7 +39,7 @@ app = Application.Quix(
 )
 
 # Define an input topic with JSON deserializer
-input_topic = app.topic(os.environ['input'], value_deserializer="quix")
+input_topic = app.topic(os.environ['input'], value_deserializer="json") # Merlin.. i updated this for you
 
 # Initialize a streaming dataframe based on the stream of messages from the input topic:
 sdf = app.dataframe(topic=input_topic)
