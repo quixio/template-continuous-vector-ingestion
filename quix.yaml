@@ -22,13 +22,12 @@ deployments:
         value: raw-documents
   - name: Create embeddings
     application: Create Embeddings
-    deploymentType: Service
+    deploymentType: Job
     version: 8f4553522ad38cf79cc5c79ab6ad1aaf52ca0323
     resources:
       cpu: 200
       memory: 500
       replicas: 1
-    desiredStatus: Stopped
     variables:
       - name: input
         inputType: InputTopic
