@@ -1,5 +1,5 @@
 # This code will publish the CSV data to a stream as if the data were being generated in real-time.
-
+ 
 # Import the supplimentary Quix Streams modules for interacting with Kafka: 
 from quixstreams.kafka import Producer
 from quixstreams.platforms.quix import QuixKafkaConfigsBuilder, TopicCreationConfigs
