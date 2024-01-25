@@ -11,6 +11,11 @@ variables:
     description: ''
     defaultValue: myvectordb
     required: true
+  - name: collectionname
+    inputType: FreeText
+    description: ''
+    defaultValue: mycollection
+    required: false
 dockerfile: dockerfile
 runEntryPoint: main.py
 defaultFile: main.py
