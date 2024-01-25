@@ -6,10 +6,10 @@ metadata:
 
 # This section describes the Deployments of the data pipeline
 deployments:
-  - name: CSV data
+  - name: Produce data from CSV
     application: CSV data
     deploymentType: Service
-    version: 0c503d937bfacfb32714cb100bca115725fdd731
+    version: 23422c79f67ce3ebf98c243d0c7000aad02dc3c7
     resources:
       cpu: 200
       memory: 500
