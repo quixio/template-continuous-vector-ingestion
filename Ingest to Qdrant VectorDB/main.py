@@ -2,8 +2,10 @@ from quixstreams.kafka import Producer
 from quixstreams import Application, State, message_key
 from sentence_transformers import SentenceTransformer
 from qdrant_client import models, QdrantClient
+import os
 
 qdrant = QdrantClient(path="./scifi-books4") # persist a Qdrant DB on the filesystem
+encoder = SentenceTransformer('all-MiniLM-L6-v2') # Model to create embeddings
 
 # Create collection to store books
 qdrant.recreate_collection(
@@ -30,15 +32,14 @@ def ingest_vectors(row):
 
   print(f'Ingested vector entry id: "{row["doc_uuid"]}"...')
 
-app = Application(
-    broker_address="127.0.0.1:9092",
-    consumer_group="vectorizer3",
+app = Application.Quix(
+    "qts__purchase_notifier",
     auto_offset_reset="earliest",
-    consumer_extra_config={"allow.auto.create.topics": "true"},
+    auto_create_topics=True,  # Quix app has an option to auto create topics
 )
 
 # Define an input topic with JSON deserializer
-input_topic = app.topic(inputtopicname, value_deserializer="json")
+input_topic = app.topic(os.environ['input'], value_deserializer="json")
 
 # Initialize a streaming dataframe based on the stream of messages from the input topic:
 sdf = app.dataframe(topic=input_topic)
