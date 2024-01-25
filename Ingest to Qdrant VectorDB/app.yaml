@@ -6,6 +6,11 @@ variables:
     description: This is the input topic for demo data
     defaultValue: ''
     required: true
+  - name: vectordbname
+    inputType: FreeText
+    description: ''
+    defaultValue: myvectordb
+    required: true
 dockerfile: dockerfile
 runEntryPoint: main.py
 defaultFile: main.py
