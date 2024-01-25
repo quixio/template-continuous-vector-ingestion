@@ -1,4 +1,4 @@
-name: Create Embeddings
+name: Create embeddings
 language: python
 variables:
   - name: input
