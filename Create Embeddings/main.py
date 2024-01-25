@@ -7,7 +7,7 @@ encoder = SentenceTransformer('all-MiniLM-L6-v2') # Model to create embeddings
 
 # Define the embedding function
 def create_embeddings(row):
-    text = row['description'] #merlin.. i changed this to match the incoming data
+    text = row['description'] #  Merlin.. i changed this to match the incoming data
     embeddings = encoder.encode(text)
     embedding_list = embeddings.tolist() # Conversion step because SentenceTransformer outputs a numpy Array but Qdrant expects a plain list
     print(f'Created vector: "{embedding_list}"')
@@ -21,7 +21,7 @@ app = Application.Quix(
 )
 
 # Define an input topic with JSON deserializer
-input_topic = app.topic(os.environ['input'], value_deserializer="json")
+input_topic = app.topic(os.environ['input'], value_deserializer="json") #  Merlin! I changed these from "quix" to "json"
 
 # Define an output topic with JSON serializer
 output_topic = app.topic(os.environ['output'], value_serializer="json")
