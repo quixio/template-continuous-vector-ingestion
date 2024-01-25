@@ -1,4 +1,4 @@
-name: CSV data
+name: Produce data from CSV
 language: python
 variables:
   - name: output
