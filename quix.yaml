@@ -19,7 +19,7 @@ deployments:
         inputType: OutputTopic
         description: Name of the output topic to write into
         required: true
-        value: raw-documents
+        value: raw-documents-a
   - name: Create embeddings
     application: Create Embeddings
     deploymentType: Job
