@@ -1,15 +1,14 @@
-from quixstreams.kafka import Producer
-from quixstreams import Application, State, message_key
+from quixstreams import Application
 from sentence_transformers import SentenceTransformer
 from qdrant_client import models, QdrantClient
 import os
 
-qdrant = QdrantClient(path="./scifi-books4") # persist a Qdrant DB on the filesystem
+qdrant = QdrantClient(path=f"./{os.environ['vectordbname']}") # persist a Qdrant DB on the filesystem
 encoder = SentenceTransformer('all-MiniLM-L6-v2') # Model to create embeddings
 
 # Create collection to store books
 qdrant.recreate_collection(
-    collection_name="my_books",
+    collection_name=os.environ['vectordbname'],
     vectors_config=models.VectorParams(
         size=encoder.get_sentence_embedding_dimension(), # Vector size is defined by used model
         distance=models.Distance.COSINE
@@ -26,14 +25,14 @@ def ingest_vectors(row):
     )
 
   qdrant.upload_points(
-      collection_name="my_books",
+      collection_name=os.environ['vectordbname'],
       points=[single_record]
     )
 
   print(f'Ingested vector entry id: "{row["doc_uuid"]}"...')
 
 app = Application.Quix(
-    "qts__purchase_notifier",
+    "vectorizer",
     auto_offset_reset="earliest",
     auto_create_topics=True,  # Quix app has an option to auto create topics
 )
