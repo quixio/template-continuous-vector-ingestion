@@ -33,7 +33,7 @@ deployments:
         inputType: InputTopic
         description: Name of the input topic to listen to.
         required: false
-        value: raw-documents
+        value: raw-documents-a
       - name: output
         inputType: OutputTopic
         description: Name of the output topic to write to.
