@@ -64,6 +64,36 @@ deployments:
         description: ''
         required: false
         value: mycollection
+  - name: Ingest to Qdrant Cloud VectorDB
+    application: Ingest to Qdrant Cloud VectorDB
+    deploymentType: Service
+    version: a5c21f85f554c5345075b169617bbb0d9956a49d
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    desiredStatus: Running
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: This is the input topic for demo data
+        required: true
+        value: embeddings-sbert
+      - name: vectordbname
+        inputType: FreeText
+        description: ''
+        required: true
+        value: myvectordb
+      - name: collectionname
+        inputType: FreeText
+        description: ''
+        required: false
+        value: mycollection
+      - name: qdrant_apikey
+        inputType: Secret
+        description: ''
+        required: true
+        secretKey: qdrant_apikey
 
 # This section describes the Topics of the data pipeline
 topics:
