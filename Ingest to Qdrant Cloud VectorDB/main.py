@@ -3,8 +3,10 @@ from sentence_transformers import SentenceTransformer
 from qdrant_client import models, QdrantClient
 import os
 
-qdrant = QdrantClient(path=f"./{os.environ['vectordbname']}") # persist a Qdrant DB on the filesystem
-
+qdrant = QdrantClient(
+    url="https://620342be-1e5e-401c-98da-42bcaddaed57.us-east4-0.gcp.cloud.qdrant.io:6333", 
+    api_key=os.environ['qdrant_apikey'],
+)
 
 encoder = SentenceTransformer('all-MiniLM-L6-v2') # Model to create embeddings
 collection = os.environ['collectionname']
