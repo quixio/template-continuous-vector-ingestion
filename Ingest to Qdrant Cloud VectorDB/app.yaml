@@ -16,6 +16,11 @@ variables:
     description: ''
     defaultValue: mycollection
     required: false
+  - name: qdrant_apikey
+    inputType: Secret
+    description: ''
+    defaultValue: qdrant_apikey
+    required: true
 dockerfile: dockerfile
 runEntryPoint: main.py
 defaultFile: main.py
