@@ -20,7 +20,7 @@ qdrant.recreate_collection(
 def ingest_vectors(row):
 
   single_record = models.PointStruct(
-    id=row['doc_uuid'],
+    id=row['index'],
     vector=row['embeddings'],
     payload=row
     )
@@ -30,7 +30,7 @@ def ingest_vectors(row):
       points=[single_record]
     )
 
-  print(f'Ingested vector entry id: "{row["doc_uuid"]}"...')
+  print(f'Ingested vector entry id: "{row["index"]}"...')
 
 app = Application.Quix(
     "vectorizer",
