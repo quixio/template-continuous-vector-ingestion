@@ -1,0 +1,21 @@
+name: Ingest to Qdrant Cloud VectorDB
+language: python
+variables:
+  - name: input
+    inputType: InputTopic
+    description: This is the input topic for demo data
+    defaultValue: embeddings-sbert
+    required: true
+  - name: vectordbname
+    inputType: FreeText
+    description: ''
+    defaultValue: myvectordb
+    required: true
+  - name: collectionname
+    inputType: FreeText
+    description: ''
+    defaultValue: mycollection
+    required: false
+dockerfile: dockerfile
+runEntryPoint: main.py
+defaultFile: main.py
