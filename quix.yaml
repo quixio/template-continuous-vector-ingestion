@@ -67,12 +67,12 @@ deployments:
   - name: Ingest to Qdrant Cloud VectorDB
     application: Ingest to Qdrant Cloud VectorDB
     deploymentType: Service
-    version: 3e2a57e2a0a254b8c8fd7d14d7cc9ad0419d4c74
+    version: a5c21f85f554c5345075b169617bbb0d9956a49d
     resources:
       cpu: 200
       memory: 500
       replicas: 1
-    desiredStatus: Running
+    desiredStatus: Stopped
     variables:
       - name: input
         inputType: InputTopic
