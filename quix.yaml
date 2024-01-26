@@ -39,7 +39,7 @@ deployments:
         description: Name of the output topic to write to.
         required: false
         value: embeddings-sbert
-  - name: Ingest to Qdrant VectorDB
+  - name: Ingest to Local Qdrant VectorDB
     application: Ingest to Qdrant VectorDB
     deploymentType: Service
     version: 142f81be20c95aa45784e4ec5e096353d88c72f1
