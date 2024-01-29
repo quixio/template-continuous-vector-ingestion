@@ -1,5 +1,5 @@
 # This code will publish the CSV data to a stream as if the data were being generated in real-time.
-
+ 
 # Import the supplimentary Quix Streams modules for interacting with Kafka: 
 from quixstreams.kafka import Producer
 from quixstreams.platforms.quix import QuixKafkaConfigsBuilder, TopicCreationConfigs
@@ -13,6 +13,8 @@ import threading
 import random
 import time
 import os
+import uuid
+import json
 
 # import the dotenv module to load environment variables from a file
 from dotenv import load_dotenv
@@ -103,47 +105,29 @@ def process_csv_file(csv_file):
         print("Timestamp column renamed.")
 
 
-    # generate a unique stream id for this data stream
-    stream_id = f"CSV_DATA_{str(random.randint(1, 100)).zfill(3)}"
-
-    # Get the column headers as a list
-    headers = df.columns.tolist()
-        
-    # Iterate over the rows and send them to the API
+with Producer(
+    broker_address="127.0.0.1:9092",
+    extra_config={"allow.auto.create.topics": "true"},
+) as producer:
     for index, row in df.iterrows():
-
-        # If shutdown has been requested, exit the loop.
-        if shutting_down:
+                
+        if shutting_down: # If shutdown has been requested, exit the loop.
             break
-
-        # Create a dictionary that includes both column headers and row values
-        row_data = {header: row[header] for header in headers}
-        
-        # add a new timestamp column with the current data and time
-        row_data['Timestamp'] = int(time.time() * 1e9)
+        row_data = {header: row[header] for header in headers} # Create a dictionary that includes both column headers and row values
+        row_data['Timestamp'] = int(time.time() * 1e9) # add a new timestamp column with the current data and time 
+        # (MC: Why though? wanna know "why" rather than "what"- i.e. we need the time in nanoseconds)
 
         # publish the row via the wrapper function
         publish_row(stream_id, row_data)
 
-        if not keep_timing or not has_timestamp_column:
-            # Don't want to keep the original timing or no timestamp? Thats ok, just sleep for 200ms
-            time.sleep(0.2)
-        else:
-            # Delay sending the next row if it exists
-            # The delay is calculated using the original timestamps and ensure the data 
-            # is published at a rate similar to the original data rates
-            if index + 1 < len(df):
-                current_timestamp = pd.to_datetime(row['original_timestamp'])
-                next_timestamp = pd.to_datetime(df.at[index + 1, 'original_timestamp'])
-                time_difference = next_timestamp - current_timestamp
-                delay_seconds = time_difference.total_seconds()
-                
-                # handle < 0 delays
-                if delay_seconds < 0:
-                    delay_seconds = 0
-
-                time.sleep(delay_seconds)
-
+        print(f"Producing value: {value}")
+        producer.produce(
+            topic=outputtopicname,
+            headers=[("uuid", doc_uuid)],  # a dict is also allowed here
+            key=doc_key,
+            value=json.dumps(value),  # needs to be a string
+        )
+        time.sleep(0.2)
 
 # Run the CSV processing in a thread
 processing_thread = threading.Thread(target=process_csv_file, args=("documents.csv",))
