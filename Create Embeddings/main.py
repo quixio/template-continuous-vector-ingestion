@@ -7,7 +7,10 @@ encoder = SentenceTransformer('all-MiniLM-L6-v2') # Model to create embeddings
 
 # Define the embedding function
 def create_embeddings(row):
-    text = row['description'] #  Merlin.. i changed this to match the incoming data
+
+    # link,headline,category,short_description,authors,date
+
+    text = row['short_description'] #  Merlin.. i changed this to match the incoming data
     embeddings = encoder.encode(text)
     embedding_list = embeddings.tolist() # Conversion step because SentenceTransformer outputs a numpy Array but Qdrant expects a plain list
     print(f'Created vector: "{embedding_list}"')
