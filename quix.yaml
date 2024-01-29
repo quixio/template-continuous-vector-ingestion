@@ -58,12 +58,12 @@ deployments:
         inputType: FreeText
         description: ''
         required: true
-        value: myvectordb
+        value: news
       - name: collectionname
         inputType: FreeText
         description: ''
         required: false
-        value: mycollection
+        value: news_articles
   - name: Ingest to Qdrant Cloud VectorDB
     application: Ingest to Qdrant Cloud VectorDB
     deploymentType: Service
