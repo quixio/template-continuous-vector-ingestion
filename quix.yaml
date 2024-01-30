@@ -22,7 +22,7 @@ deployments:
         value: raw-documents-a
   - name: Create embeddings
     application: Create Embeddings
-    deploymentType: Job
+    deploymentType: Service
     version: ba7e79eafc34daac8b45f0e58946d2c8d8aafae3
     resources:
       cpu: 200
