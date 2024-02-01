@@ -8,7 +8,7 @@ metadata:
 deployments:
   - name: Produce data from CSV
     application: CSV data
-    deploymentType: Job
+    deploymentType: Service
     version: 659b5e4e9c2a710e18d0c878a91ec879a447a298
     resources:
       cpu: 200
