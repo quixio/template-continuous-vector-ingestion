@@ -24,7 +24,7 @@ deployments:
   - name: Create embeddings
     application: Create Embeddings
     deploymentType: Job
-    version: ba7e79eafc34daac8b45f0e58946d2c8d8aafae3
+    version: a691deed1ccfebc933acc9b3b3d7e2802ff6328a
     resources:
       cpu: 200
       memory: 500
