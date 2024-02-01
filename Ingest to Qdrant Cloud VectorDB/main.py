@@ -4,7 +4,7 @@ from qdrant_client import models, QdrantClient
 import os
 
 qdrant = QdrantClient(
-    url="https://620342be-1e5e-401c-98da-42bcaddaed57.us-east4-0.gcp.cloud.qdrant.io:6333", 
+    url=os.environ['qdrant_url'], 
     api_key=os.environ['qdrant_apikey'],
 )
 
