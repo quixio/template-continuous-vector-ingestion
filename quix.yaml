@@ -118,3 +118,10 @@ topics:
       replicationFactor: 3
       retentionInMinutes: 1440
       retentionInBytes: 52428800
+  - name: numbers-quix-v2
+    persisted: false
+    configuration:
+      partitions: 1
+      replicationFactor: 3
+      retentionInMinutes: 1440
+      retentionInBytes: 52428800
