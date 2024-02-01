@@ -67,7 +67,7 @@ deployments:
   - name: Ingest to Qdrant Cloud VectorDB
     application: Ingest to Qdrant Cloud VectorDB
     deploymentType: Service
-    version: a5c21f85f554c5345075b169617bbb0d9956a49d
+    version: 910820dd6108f8ccc0563fb4ee59f5ea90761644
     resources:
       cpu: 200
       memory: 500
@@ -94,6 +94,11 @@ deployments:
         description: ''
         required: true
         secretKey: qdrant_apikey
+      - name: qdrant_url
+        inputType: FreeText
+        description: ''
+        required: false
+        value: https://1242ba45-04ba-4852-9afe-5c39e284d3f0.us-east4-0.gcp.cloud.qdrant.io:6333
 
 # This section describes the Topics of the data pipeline
 topics:
