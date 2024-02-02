@@ -2,6 +2,7 @@ import streamlit as st
 from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
 import os
+import time
 
 # Initialize the sentence transformer model
 model = SentenceTransformer('all-MiniLM-L6-v2')
@@ -44,3 +45,6 @@ st.write(search_result)
 #    st.write("---")
 
 print(f"Total points vectorized {total_points}")
+
+while True:
+    time.sleep(1)
