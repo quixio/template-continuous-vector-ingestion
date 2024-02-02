@@ -1,1 +1,4 @@
 quixstreams==0.5.7
+streamlit
+qdrant-client
+sentence_transformers
