@@ -94,6 +94,34 @@ deployments:
         description: ''
         required: true
         secretKey: qdrant_apikey
+  - name: Streamlit dashboard
+    application: Streamlit dashboard
+    deploymentType: Service
+    version: abed06f008c223a1a8d962ddb8cf5c13b07bfd50
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    publicAccess:
+      enabled: true
+      urlPrefix: streamlitdashboard
+    desiredStatus: Running
+    variables:
+      - name: collectionname
+        inputType: FreeText
+        description: ''
+        required: false
+        value: mycollection
+      - name: qdrant_apikey
+        inputType: Secret
+        description: ''
+        required: false
+        secretKey: qdrant_apikey
+      - name: qdrant_url
+        inputType: FreeText
+        description: ''
+        required: false
+        value: https://620342be-1e5e-401c-98da-42bcaddaed57.us-east4-0.gcp.cloud.qdrant.io:6333
 
 # This section describes the Topics of the data pipeline
 topics:
