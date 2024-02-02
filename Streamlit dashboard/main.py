@@ -37,9 +37,10 @@ search_result = client.search(
 print(search_result)
 # Display the results in a Streamlit app
 st.title('Qdrant Search Results')
-for result in search_result:
-    st.write(f"[ID: {result.id}] {result.payload['phrase']}")
-    st.write(f"Score: {result.score}")
-    st.write("---")
+st.write(search_result)
+#for result in search_result:
+#    st.write(f"[ID: {result.id}] {result.payload['phrase']}")
+#    st.write(f"Score: {result.score}")
+#    st.write("---")
 
 print(f"Total points vectorized {total_points}")
