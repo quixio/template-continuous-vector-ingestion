@@ -11,6 +11,11 @@ variables:
     description: This is the output topic to write data to
     defaultValue: output-topic
     required: true
+  - name: collectionname
+    inputType: FreeText
+    description: ''
+    defaultValue: mycollection
+    required: false
 dockerfile: dockerfile
 runEntryPoint: main.py
 defaultFile: main.py
