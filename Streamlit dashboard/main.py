@@ -1,9 +1,6 @@
 import streamlit as st
 from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
-from qdrant_client.models import Distance, VectorParams
-import numpy as np
-from qdrant_client.models import PointStruct
 import os
 
 # Initialize the sentence transformer model
