@@ -17,7 +17,7 @@ client = QdrantClient(
 
 collection = os.environ['collectionname']
 
-total_points = client.get_collection(collection_name="demo_collection").points_count
+total_points = client.get_collection(collection_name=col).points_count
 print("---------")
 print(total_points)
 
