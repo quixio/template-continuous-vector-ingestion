@@ -21,6 +21,11 @@ variables:
     description: ''
     defaultValue: qdrant_apikey
     required: false
+  - name: qdrant_url
+    inputType: FreeText
+    description: ''
+    defaultValue: https://1242ba45-04ba-4852-9afe-5c39e284d3f0.us-east4-0.gcp.cloud.qdrant.io:6333
+    required: false
 dockerfile: dockerfile
 runEntryPoint: main.py
 defaultFile: main.py
