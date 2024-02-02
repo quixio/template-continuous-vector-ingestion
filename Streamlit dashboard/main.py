@@ -6,6 +6,9 @@ import os
 # Initialize the sentence transformer model
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
+print(os.environ['qdrant_url'])
+print(os.environ['qdrant_apikey'])
+
 # Initialize the client with your cloud Qdrant database
 client = QdrantClient(
     url=os.environ['qdrant_url'], 
