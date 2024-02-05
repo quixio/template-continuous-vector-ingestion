@@ -26,7 +26,7 @@ deployments:
     version: e0b0353eeb80102091517f46cda34360cdad9959
     resources:
       cpu: 200
-      memory: 500
+      memory: 1500
       replicas: 1
     variables:
       - name: input
