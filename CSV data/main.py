@@ -150,7 +150,7 @@ def process_csv_file(csv_file):
 
 
 # Run the CSV processing in a thread
-processing_thread = threading.Thread(target=process_csv_file, args=("new_dataset.csv",))
+processing_thread = threading.Thread(target=process_csv_file, args=("news_dataset.csv",))
 processing_thread.start()
 
 # Run this method before shutting down.
