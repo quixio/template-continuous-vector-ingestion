@@ -66,6 +66,7 @@ deployments:
     publicAccess:
       enabled: true
       urlPrefix: streamlitdashboard-0d304f
+    desiredStatus: Running
     variables:
       - name: collectionname
         inputType: FreeText
