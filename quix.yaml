@@ -58,10 +58,10 @@ deployments:
   - name: Streamlit dashboard
     application: Streamlit dashboard
     deploymentType: Service
-    version: 775745e8048b20879159be16c918225dc17c919d
+    version: 947ecd87f2a5262b2a79758801e46037858a6e5b
     resources:
-      cpu: 200
-      memory: 500
+      cpu: 1000
+      memory: 2000
       replicas: 1
     publicAccess:
       enabled: true
