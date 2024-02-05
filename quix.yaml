@@ -6,20 +6,6 @@ metadata:
 
 # This section describes the Deployments of the data pipeline
 deployments:
-  - name: Produce data from CSV
-    application: CSV data
-    deploymentType: Job
-    version: 659b5e4e9c2a710e18d0c878a91ec879a447a298
-    resources:
-      cpu: 200
-      memory: 500
-      replicas: 1
-    variables:
-      - name: output
-        inputType: OutputTopic
-        description: Name of the output topic to write into
-        required: true
-        value: raw-documents-a
   - name: Create embeddings
     application: Create Embeddings
     deploymentType: Service
