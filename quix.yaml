@@ -91,7 +91,7 @@ deployments:
     publicAccess:
       enabled: true
       urlPrefix: streamlitdashboard
-    desiredStatus: Stopped
+    desiredStatus: Running
     variables:
       - name: collectionname
         inputType: FreeText
