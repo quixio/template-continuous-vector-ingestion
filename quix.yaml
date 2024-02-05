@@ -61,7 +61,7 @@ deployments:
     version: 947ecd87f2a5262b2a79758801e46037858a6e5b
     resources:
       cpu: 1000
-      memory: 2000
+      memory: 3000
       replicas: 1
     publicAccess:
       enabled: true
@@ -72,7 +72,7 @@ deployments:
         inputType: FreeText
         description: ''
         required: false
-        value: book-catalog
+        value: mycollection
       - name: qdrant_apikey
         inputType: Secret
         description: ''
