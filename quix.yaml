@@ -9,7 +9,7 @@ deployments:
   - name: Produce data from CSV
     application: CSV data
     deploymentType: Job
-    version: 538fc3ec9297c7e66df26b630004a99b5138fb2d
+    version: 2235ff868ba2c3ef864c2016d55fb416a7b615af
     resources:
       cpu: 200
       memory: 500
