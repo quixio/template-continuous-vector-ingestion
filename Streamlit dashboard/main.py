@@ -4,6 +4,10 @@ from sentence_transformers import SentenceTransformer
 import os
 import time
 
+# import the dotenv module to load environment variables from a file
+#from dotenv import load_dotenv
+#load_dotenv(override=False)
+
 try:
     # Initialize the sentence transformer model
     model = SentenceTransformer('all-MiniLM-L6-v2')
@@ -39,11 +43,13 @@ try:
     print(search_result)
     # Display the results in a Streamlit app
     st.title('Qdrant Search Results')
-    st.write(search_result)
-    #for result in search_result:
-    #    st.write(f"[ID: {result.id}] {result.payload['phrase']}")
-    #    st.write(f"Score: {result.score}")
-    #    st.write("---")
+    #st.write(search_result[0])
+    for result in search_result:
+        st.write(f"[ID: {result.id}] {result.payload['name']} - {result.payload['author']}")
+#        if "description" in result:
+#            st.write(f"{result.description}")
+        st.write(f"Score: {result.score}")
+        st.write("---")
 
     print(f"Total points vectorized {total_points}")
 
