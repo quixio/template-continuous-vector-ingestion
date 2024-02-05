@@ -72,7 +72,7 @@ deployments:
         inputType: FreeText
         description: ''
         required: false
-        value: mycollection
+        value: book-catalog
       - name: qdrant_apikey
         inputType: Secret
         description: ''
