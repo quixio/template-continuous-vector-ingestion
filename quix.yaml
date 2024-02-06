@@ -124,4 +124,11 @@ deployments:
         value: documents_pt2.csv
 
 # This section describes the Topics of the data pipeline
-topics: []
+topics:
+  - name: embeddings-sbert-v1
+    persisted: false
+    configuration:
+      partitions: 1
+      replicationFactor: 2
+      retentionInMinutes: 1440
+      retentionInBytes: 52428800
