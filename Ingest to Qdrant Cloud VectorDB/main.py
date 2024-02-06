@@ -34,7 +34,7 @@ def ingest_vectors(row):
       points=[single_record]
     )
 
-  print(f'Ingested vector entry id: "{row['doc_uuid']}"...')
+  print(f'Ingested vector entry id: "{row["doc_uuid"]}"...')
 
 app = Application.Quix(
     "vectorizercloud1",
