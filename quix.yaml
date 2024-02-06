@@ -86,7 +86,7 @@ deployments:
         inputType: OutputTopic
         description: Name of the output topic to write into
         required: true
-        value: raw-documents-e
+        value: raw-documents-v2
       - name: csv_file
         inputType: FreeText
         description: ''
