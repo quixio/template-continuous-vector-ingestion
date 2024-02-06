@@ -11,6 +11,7 @@ from datetime import datetime
 import pandas as pd
 import threading
 import random
+import uuid
 import time
 import os
 
@@ -109,7 +110,7 @@ def process_csv_file(csv_file):
 
     # generate a unique stream id for this data stream
     stream_id = f"CSV_DATA_{str(random.randint(1, 100)).zfill(3)}"
-
+    
     # Get the column headers as a list
     headers = df.columns.tolist()
         
@@ -123,8 +124,8 @@ def process_csv_file(csv_file):
         # Create a dictionary that includes both column headers and row values
         row_data = {header: row[header] for header in headers}
         
-        # add a new timestamp column with the current data and time
-        row_data['Timestamp'] = int(time.time() * 1e9)
+        row_data['Timestamp'] = int(time.time() * 1e9)  # add a new timestamp column with the current data and time
+        row_data['doc_uuid'] = str(uuid.uuid4()) # add uuid for vector db entry
 
         # publish the row via the wrapper function
         publish_row(stream_id, row_data)
