@@ -9,7 +9,7 @@ variables:
   - name: vectordbname
     inputType: FreeText
     description: ''
-    defaultValue: books-catalog
+    defaultValue: quix-demo
     required: true
   - name: collectionname
     inputType: FreeText
