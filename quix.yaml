@@ -44,12 +44,12 @@ deployments:
         inputType: FreeText
         description: ''
         required: true
-        value: myvectordb
+        value: book-catalog
       - name: collectionname
         inputType: FreeText
         description: ''
         required: false
-        value: mycollection
+        value: books-catalog
       - name: qdrant_apikey
         inputType: Secret
         description: ''
