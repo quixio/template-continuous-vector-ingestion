@@ -39,7 +39,7 @@ deployments:
         inputType: InputTopic
         description: This is the input topic for demo data
         required: true
-        value: embeddings-sbert-b
+        value: embeddings-sbert-c
       - name: vectordbname
         inputType: FreeText
         description: ''
