@@ -124,11 +124,4 @@ deployments:
         value: documents_pt2.csv
 
 # This section describes the Topics of the data pipeline
-topics:
-  - name: raw-documents
-    persisted: false
-    configuration:
-      partitions: 1
-      replicationFactor: 2
-      retentionInMinutes: 1440
-      retentionInBytes: 52428800
+topics: []
