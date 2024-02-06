@@ -20,12 +20,12 @@ deployments:
         inputType: InputTopic
         description: Name of the input topic to listen to.
         required: false
-        value: raw-documents-v4
+        value: raw-documents
       - name: output
         inputType: OutputTopic
         description: Name of the output topic to write to.
         required: false
-        value: embeddings-sbert-v4
+        value: embeddings-sbert
   - name: Streamlit dashboard
     application: Streamlit dashboard
     deploymentType: Service
