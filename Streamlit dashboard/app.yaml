@@ -4,7 +4,7 @@ variables:
   - name: collectionname
     inputType: FreeText
     description: ''
-    defaultValue: book-catalog
+    defaultValue: books-catalog
     required: false
   - name: qdrant_apikey
     inputType: Secret
