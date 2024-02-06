@@ -102,6 +102,25 @@ deployments:
         description: ''
         required: false
         value: documents_pt1.csv
+  - name: PT 2 | Produce data from CSV
+    application: CSV data
+    deploymentType: Job
+    version: 7034404fc1b4fd28bebbd84a67e9d901528d5ebe
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    variables:
+      - name: output
+        inputType: OutputTopic
+        description: Name of the output topic to write into
+        required: true
+        value: raw-documents-c
+      - name: csv_file
+        inputType: FreeText
+        description: ''
+        required: false
+        value: documents_pt2.csv
 
 # This section describes the Topics of the data pipeline
 topics:
