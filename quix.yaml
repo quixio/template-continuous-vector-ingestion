@@ -94,6 +94,31 @@ deployments:
         description: ''
         required: false
         value: documents_pt2.csv
+  - name: Streamlit dashboard
+    application: Streamlit dashboard
+    deploymentType: Service
+    version: finalsearch
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    desiredStatus: Running
+    variables:
+      - name: collectionname
+        inputType: FreeText
+        description: ''
+        required: false
+        value: books-catalog
+      - name: qdrant_apikey
+        inputType: Secret
+        description: ''
+        required: false
+        secretKey: qdrant_apikey
+      - name: qdrant_url
+        inputType: FreeText
+        description: ''
+        required: false
+        value: https://620342be-1e5e-401c-98da-42bcaddaed57.us-east4-0.gcp.cloud.qdrant.io:6333
 
 # This section describes the Topics of the data pipeline
 topics:
