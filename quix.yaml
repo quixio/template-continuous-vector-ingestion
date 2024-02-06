@@ -103,26 +103,6 @@ deployments:
         description: ''
         required: true
         secretKey: qdrant_apikey
-  - name: PT 2 | Produce data from CSV
-    application: CSV data
-    deploymentType: Service
-    version: d019d8ce457269c4ff0cf20872dcb176d9e0729e
-    resources:
-      cpu: 200
-      memory: 500
-      replicas: 1
-    desiredStatus: Stopped
-    variables:
-      - name: output
-        inputType: OutputTopic
-        description: Name of the output topic to write into
-        required: true
-        value: raw-documents-v3
-      - name: csv_file
-        inputType: FreeText
-        description: ''
-        required: false
-        value: documents_pt2.csv
 
 # This section describes the Topics of the data pipeline
 topics:
