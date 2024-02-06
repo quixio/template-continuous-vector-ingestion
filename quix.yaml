@@ -44,7 +44,7 @@ deployments:
         inputType: FreeText
         description: ''
         required: true
-        value: book-catalog
+        value: quix-demo
       - name: collectionname
         inputType: FreeText
         description: ''
