@@ -95,7 +95,7 @@ deployments:
   - name: Ingest to Qdrant Cloud VectorDB
     application: Ingest to Qdrant Cloud VectorDB
     deploymentType: Service
-    version: 2db257d6500e3da5d2e3243000a8940cbd426e3a
+    version: e5186852ffa7106831f5f334a921f05a26ef13bb
     resources:
       cpu: 200
       memory: 500
