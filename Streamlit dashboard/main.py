@@ -68,7 +68,7 @@ if search_term != "":
 
             print(f"Total points stored {total_points}")
             # Display the results in a Streamlit app
-            st.title('Qdrant Search Results')
+            st.markdown('**Qdrant Search Results**')
 
             if len(search_result) < 1:
                 print("No matches")
