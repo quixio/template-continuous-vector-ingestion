@@ -24,7 +24,7 @@ deployments:
         inputType: OutputTopic
         description: Name of the output topic to write to.
         required: false
-        value: embeddings-sbert-b
+        value: embeddings-sbert-c
   - name: Ingest to Qdrant Cloud VectorDB
     application: Ingest to Qdrant Cloud VectorDB
     deploymentType: Service
