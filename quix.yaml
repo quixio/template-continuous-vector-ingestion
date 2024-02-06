@@ -86,7 +86,7 @@ deployments:
   - name: PT1 | Produce data from CSV
     application: CSV data
     deploymentType: Job
-    version: 7034404fc1b4fd28bebbd84a67e9d901528d5ebe
+    version: d019d8ce457269c4ff0cf20872dcb176d9e0729e
     resources:
       cpu: 200
       memory: 500
@@ -96,7 +96,7 @@ deployments:
         inputType: OutputTopic
         description: Name of the output topic to write into
         required: true
-        value: raw-documents-c
+        value: raw-documents-e
       - name: csv_file
         inputType: FreeText
         description: ''
