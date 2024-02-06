@@ -19,12 +19,12 @@ deployments:
         inputType: InputTopic
         description: Name of the input topic to listen to.
         required: false
-        value: raw-documents-c
+        value: raw-documents-e
       - name: output
         inputType: OutputTopic
         description: Name of the output topic to write to.
         required: false
-        value: embeddings-sbert-c
+        value: raw-documents-e
   - name: Ingest to Qdrant Cloud VectorDB
     application: Ingest to Qdrant Cloud VectorDB
     deploymentType: Service
