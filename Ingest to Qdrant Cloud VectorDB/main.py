@@ -24,7 +24,7 @@ qdrant.recreate_collection(
 def ingest_vectors(row):
 
   single_record = models.PointStruct(
-    id=row['index'],
+    id=row['doc_uuid'],
     vector=row['embeddings'],
     payload=row
     )
