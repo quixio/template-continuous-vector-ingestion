@@ -9,7 +9,7 @@ variables:
   - name: vectordbname
     inputType: FreeText
     description: ''
-    defaultValue: myvectordb
+    defaultValue: books-catalog
     required: true
   - name: collectionname
     inputType: FreeText
