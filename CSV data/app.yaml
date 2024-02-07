@@ -1,0 +1,16 @@
+name: Produce data from CSV
+language: python
+variables:
+  - name: output
+    inputType: OutputTopic
+    description: Name of the output topic to write into
+    defaultValue: raw-documents-e
+    required: true
+  - name: csv_file
+    inputType: FreeText
+    description: ''
+    defaultValue: documents_pt1.csv
+    required: false
+dockerfile: dockerfile
+runEntryPoint: main.py
+defaultFile: main.py

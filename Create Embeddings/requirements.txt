@@ -1,0 +1,2 @@
+quixstreams==2.2.0a0
+sentence_transformers

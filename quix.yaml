@@ -1,0 +1,141 @@
+# Quix Project Descriptor
+# This file describes the data pipeline and configuration of resources of a Quix Project.
+
+metadata:
+  version: 1.0
+
+# This section describes the Deployments of the data pipeline
+deployments:
+  - name: Create embeddings
+    application: Create Embeddings
+    deploymentType: Service
+    version: abb20742de9e78fa97766f59f882b71f6d71f3f1
+    resources:
+      cpu: 200
+      memory: 1000
+      replicas: 1
+    desiredStatus: Running
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: Name of the input topic to listen to.
+        required: false
+        value: raw-documents-v1
+      - name: output
+        inputType: OutputTopic
+        description: Name of the output topic to write to.
+        required: false
+        value: embeddings-sbert-v1
+  - name: PT1 | Produce data from CSV
+    application: CSV data
+    deploymentType: Job
+    version: d019d8ce457269c4ff0cf20872dcb176d9e0729e
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    variables:
+      - name: output
+        inputType: OutputTopic
+        description: Name of the output topic to write into
+        required: true
+        value: raw-documents-v1
+      - name: csv_file
+        inputType: FreeText
+        description: ''
+        required: false
+        value: documents_pt1.csv
+  - name: Ingest to Qdrant Cloud VectorDB
+    application: Ingest to Qdrant Cloud VectorDB
+    deploymentType: Service
+    version: e5186852ffa7106831f5f334a921f05a26ef13bb
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    desiredStatus: Running
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: This is the input topic for demo data
+        required: true
+        value: embeddings-sbert-v1
+      - name: vectordbname
+        inputType: FreeText
+        description: ''
+        required: true
+        value: quix-demo
+      - name: collectionname
+        inputType: FreeText
+        description: ''
+        required: false
+        value: books-catalog
+      - name: qdrant_apikey
+        inputType: Secret
+        description: ''
+        required: true
+        secretKey: qdrant_apikey
+  - name: PT 2 | produce data from CSV
+    application: CSV data
+    deploymentType: Job
+    version: d019d8ce457269c4ff0cf20872dcb176d9e0729e
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    variables:
+      - name: output
+        inputType: OutputTopic
+        description: Name of the output topic to write into
+        required: true
+        value: raw-documents-v1
+      - name: csv_file
+        inputType: FreeText
+        description: ''
+        required: false
+        value: documents_pt2.csv
+  - name: Streamlit dashboard
+    application: Streamlit dashboard
+    deploymentType: Service
+    version: finalsearch
+    resources:
+      cpu: 200
+      memory: 1000
+      replicas: 1
+    publicAccess:
+      enabled: true
+      urlPrefix: streamlitdashboard-final
+    desiredStatus: Running
+    variables:
+      - name: collectionname
+        inputType: FreeText
+        description: ''
+        required: false
+        value: books-catalog
+      - name: qdrant_apikey
+        inputType: Secret
+        description: ''
+        required: false
+        secretKey: qdrant_apikey
+      - name: qdrant_url
+        inputType: FreeText
+        description: ''
+        required: false
+        value: https://620342be-1e5e-401c-98da-42bcaddaed57.us-east4-0.gcp.cloud.qdrant.io:6333
+
+# This section describes the Topics of the data pipeline
+topics:
+  - name: embeddings-sbert-v1
+    persisted: false
+    configuration:
+      partitions: 1
+      replicationFactor: 2
+      retentionInMinutes: 1440
+      retentionInBytes: 52428800
+  - name: raw-documents-v1
+    persisted: false
+    configuration:
+      partitions: 1
+      replicationFactor: 2
+      retentionInMinutes: 1440
+      retentionInBytes: 52428800
