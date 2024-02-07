@@ -15,7 +15,7 @@ def create_embeddings(row):
     return embedding_list
 
 app = Application.Quix(
-    "vectorizer2",
+    "vectorizer",
     auto_offset_reset="earliest",
     auto_create_topics=True,  # Quix app has an option to auto create topics
 )
