@@ -4,9 +4,9 @@ This template shows you how to continuously ingest documents into a vector store
 
 This template uses the following open source libraries:
 
-* **Quix** Streams to produce data to, and consume data from, Apache Kafka.
+* **[Quix Streams](https://github.com/quixio/quix-streams)** to produce data to, and consume data from, Apache Kafka.
 
-* **Qdrant** to create a database to store embeddings and for basic similarity search
+* **[Qdrant Client](https://github.com/qdrant/qdrant-client)** to create a database to store embeddings and for basic similarity search
 
 The following screenshot illustrates the architecture of the resulting pipeline in Quix Cloud:
 ![Pipeline sscreenshot](https://uploads-ssl.webflow.com/64a7eed956ba9b9a3c62401d/65c3777fd9390c70307c3f25_VKG-idlyZnJFKXrhnOdwPTCGtWfE_UE9Lpi2Q4nmidWXBZ40hvpeUeVoxqslaH-5GUR5T69_gYLtn051sHcsptfj2JV5SDlFNkx071kPfBpBo4ZwdRRToNt-pNjQmVeJ57UMP0Yw9ahWLkpL13Cu8Qs.png)
