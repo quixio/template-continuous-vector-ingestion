@@ -16,7 +16,7 @@ You can also try out a minimal version of this pipeline in a [standalone Jupyter
 
 
 ## Trying it out
-To try out the pipeline, first clone the vector ingestion template (for more information on how to clone a project template, see the article ["How to create a project from a template in Quix](https://quix.io/blog/how-to-create-a-project-from-a-template"). 
+To try out the pipeline, first clone the vector ingestion template (for more information on how to clone a project template, see the article ["How to create a project from a template in Quix](https://quix.io/blog/how-to-create-a-project-from-a-template")). 
 
 Before you clone the pipeline, you’ll also need to sign up for a free trial account with [Qdrant Cloud](https://cloud.qdrant.io/) (you can sign up with your GitHub or Google account). When you clone the project template in Quix, you’ll be asked for your Qdrant Cloud credentials.
 
