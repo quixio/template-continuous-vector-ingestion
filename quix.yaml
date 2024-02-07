@@ -12,7 +12,7 @@ deployments:
     version: abb20742de9e78fa97766f59f882b71f6d71f3f1
     resources:
       cpu: 200
-      memory: 500
+      memory: 1000
       replicas: 1
     desiredStatus: Running
     variables:
