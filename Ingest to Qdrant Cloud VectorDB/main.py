@@ -37,7 +37,7 @@ def ingest_vectors(row):
   print(f'Ingested vector entry id: "{row["doc_uuid"]}"...')
 
 app = Application.Quix(
-    "vectorizercloud1",
+    "vectorizer",
     auto_offset_reset="earliest",
     auto_create_topics=True,  # Quix app has an option to auto create topics
 )
