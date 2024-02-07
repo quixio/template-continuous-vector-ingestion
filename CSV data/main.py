@@ -11,6 +11,7 @@ from datetime import datetime
 import pandas as pd
 import threading
 import random
+import uuid
 import time
 import os
 
@@ -122,9 +123,9 @@ def process_csv_file(csv_file):
 
         # Create a dictionary that includes both column headers and row values
         row_data = {header: row[header] for header in headers}
-        
-        # add a new timestamp column with the current data and time
-        row_data['Timestamp'] = int(time.time() * 1e9)
+
+        row_data['Timestamp'] = int(time.time() * 1e9)  # add a new timestamp column with the current data and time
+        row_data['doc_uuid'] = str(uuid.uuid4()) # add uuid for vector db entry
 
         # publish the row via the wrapper function
         publish_row(stream_id, row_data)
@@ -150,7 +151,7 @@ def process_csv_file(csv_file):
 
 
 # Run the CSV processing in a thread
-processing_thread = threading.Thread(target=process_csv_file, args=("new_dataset.csv",))
+processing_thread = threading.Thread(target=process_csv_file, args=(os.environ["csv_file"],))
 processing_thread.start()
 
 # Run this method before shutting down.

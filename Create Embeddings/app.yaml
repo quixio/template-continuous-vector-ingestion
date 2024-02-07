@@ -4,12 +4,12 @@ variables:
   - name: input
     inputType: InputTopic
     description: Name of the input topic to listen to.
-    defaultValue: raw-documents-a
+    defaultValue: raw-documents-v1
     required: false
   - name: output
     inputType: OutputTopic
     description: Name of the output topic to write to.
-    defaultValue: embeddings-sbert
+    defaultValue: embeddings-sbert-v1
     required: false
 dockerfile: dockerfile
 runEntryPoint: main.py

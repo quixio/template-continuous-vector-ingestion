@@ -4,17 +4,17 @@ variables:
   - name: input
     inputType: InputTopic
     description: This is the input topic for demo data
-    defaultValue: embeddings-sbert
+    defaultValue: embeddings-sbert-v1
     required: true
   - name: vectordbname
     inputType: FreeText
     description: ''
-    defaultValue: myvectordb
+    defaultValue: quix-demo
     required: true
   - name: collectionname
     inputType: FreeText
     description: ''
-    defaultValue: mycollection
+    defaultValue: books-catalog
     required: false
   - name: qdrant_apikey
     inputType: Secret
