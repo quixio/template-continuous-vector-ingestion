@@ -9,7 +9,7 @@ variables:
   - name: output
     inputType: OutputTopic
     description: Name of the output topic to write to.
-    defaultValue: embeddings-sbert
+    defaultValue: embeddings-sbert-v1
     required: false
 dockerfile: dockerfile
 runEntryPoint: main.py
