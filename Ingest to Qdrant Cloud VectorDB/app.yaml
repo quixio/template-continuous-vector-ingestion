@@ -4,7 +4,7 @@ variables:
   - name: input
     inputType: InputTopic
     description: This is the input topic for demo data
-    defaultValue: embeddings-sbert-v2
+    defaultValue: embeddings-sbert-v1
     required: true
   - name: vectordbname
     inputType: FreeText
