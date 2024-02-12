@@ -89,7 +89,7 @@ deployments:
         inputType: FreeText
         description: ''
         required: false
-        value: mycollection
+        value: {{ whatever_key_you _want }}
       - name: qdrant_apikey
         inputType: Secret
         description: ''
